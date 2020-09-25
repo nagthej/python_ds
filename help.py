@@ -1,27 +1,34 @@
 
+import pdb
 
-def sieve(n):
+def ifStrUnique(str):
+    #pdb.set_trace()
 
-    prime_list = [True for i in range(n+1)]
+    if len(str) == 1:
+        print("{} has unique chars".format(str))
+        return
 
-    p = 2
-    #import pdb; pdb.set_trace()
-    while(p*p <= n):
-
-        if prime_list[p] == True:
-
-            for i in range(p*2, n+1, p):
-
-                prime_list[i] = False
-
-        p = p + 1
+    if len(str) > 128:
+        print("{} does not have unique chars".format(str))
+        return
 
 
-    for i in range(2, n):
-        if(prime_list[i]):
-            print(i)
+    ascii_std_list = []
 
-# Driver code
-sieve(20)
+    for i in range(128):
+        ascii_std_list.append(False)
+
+    for char in range(len(str)):
+        ch_in_int = ord(str[char])
+        if ascii_std_list[ch_in_int] == True:
+            print("{} does not have unique chars".format(str))
+            return
+        else:
+            ascii_std_list[ch_in_int] = True
+
+    print("{} has unique chars".format(str))
 
 
+#driver code
+
+ifStrUnique("abclkj")
